@@ -1,0 +1,455 @@
+{
+	"name":"StartupUniverse",
+	"vertex_classes" : {
+		"Person" : {
+			"properties" : {
+				"name" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"firstName" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"lastName" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"permalink" : {
+					"formatMethod" : "string",
+					"type" : "identifier",
+					"mergeable" : true
+				},
+				"website" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"blog" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"blogFeed" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"twitter" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"facebook" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"linkedin" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"github" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"affiliation" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"email" : {
+					"formatMethod" : "string",
+					"type" : "email",
+					"mergeable" : true
+				}
+			},
+			"identifier" : [
+				"permalink"
+			],
+			"physical" : true
+		},
+		"Employee" : {
+			"super_class" : "Person"
+		},
+		"Tag" : {
+			"properties" : {
+				"name" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : true
+				},
+				"type" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"identifier" : [
+				"name"
+			],
+			"physical" : true
+		},
+		"Organization" : {
+			"properties" : {
+				"name" : {
+					"formatMethod" : "string",
+					"type" : "identifier",
+					"mergeable" : true
+				},
+				"al_id" : {
+					"formatMethod" : "string",
+					"type" : "identifier",
+					"mergeable" : true
+				},
+				"website" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"cb_url" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"twitter" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"blog" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"facebook" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"linkedin" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"size" : {
+					"formatMethod" : "",
+					"type" : "number",
+					"mergeable" : false
+				},
+				"phone" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"email" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : true
+				},
+				"type" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"dr_url" : {
+					"formatMethod" : "",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"al_url" : {
+					"formatMethod" : "",
+					"type" : "url",
+					"mergeable" : true
+				}
+			},
+			"identifier" : [
+				"name"
+			],
+			"physical" : true
+		},
+		"Competitor" : {
+			"super_class" : "Organization"
+		},
+		"EducationalOrganization":{
+			"super_class":"Organization"
+		},
+		"Provider" : {
+			"super_class" : "Organization"
+		},
+		"AcquiredCompany" : {
+			"super_class" : "Organization"
+		},
+		"Investment" : {
+			"properties" : {
+				"url" : {
+					"formatMethod" : "url",
+					"type" : "url",
+					"mergeable" : true
+				},
+				"raised" : {
+					"formatMethod" : "",
+					"type" : "integer",
+					"mergeable" : false
+				},
+				"currency" : {
+					"formatMethod" : "",
+					"type" : "currency",
+					"mergeable" : false
+				},
+				"round" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"funded" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"identifier" : [
+				"url"
+			],
+			"physical" : true
+		},
+		"Product" : {
+			"properties" : {
+				"name" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : true
+				},
+				"website" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"twitter" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"launched" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"deadpooled" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"identifier" : [
+				"name"
+			],
+			"physical" : true
+		},
+		"Site" : {
+			"properties" : {
+				"description" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"mainAddress" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"subAddress" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"zip" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"city" : {
+					"formatMethod" : "city",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"stateCode" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"countryCode" : {
+					"formatMethod" : "country",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"lat" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"lon" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"identifier" : [
+				"mainAddress"
+			],
+			"physical" : true
+		}
+	},
+	"edge_classes" : {
+		"hasTag" : {
+			"physical" : true
+		},
+		"hasPersonTag" : {
+			"from" : {
+				"classname" : "Person"
+			},
+			"to" : {
+				"classname" : "Tag"
+			},
+			"super_class" : "hasTag"
+		},
+		"hasOrgTag" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Tag"
+			},
+			"super_class" : "hasTag"
+		},
+		"hasRole" : {
+			"properties" : {
+				"role" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"physical" : true
+		},
+		"hasOrgRole" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Organization"
+			},
+			"super_class" : "hasRole"
+		},
+		"hasUserRole" : {
+			"from" : {
+				"classname" : "Employee"
+			},
+			"to" : {
+				"classname" : "Organization"
+			},
+			"super_class" : "hasRole"
+		},
+		"hasAcquisition" : {
+			"properties" : {
+				"acquired" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"currency" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"price" : {
+					"formatMethod" : "",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"physical" : true,
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "AcquiredCompany"
+			}
+		},
+		"hasInvestment" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Investment"
+			},
+			"physical" : true
+		},
+		"hasProduct" : {
+			"physical" : true,
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Product"
+			}
+		},
+		"hasRelationship" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Person"
+			},
+			"physical" : true
+		},
+		"hasSite" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Site"
+			},
+			"physical" : true
+		},
+		"isInvestorOf" : {
+			"from" : {
+				"classname" : "Investment"
+			},
+			"to" : {
+				"classname" : "Organization"
+			},
+			"physical" : true
+		},
+		"isProviderOf" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Provider"
+			},
+			"physical" : true
+		},
+		"hasDegree" : {
+			"from" : {
+				"classname" : "Person"
+			},
+			"to" : {
+				"classname" : "EducationalOrganization"
+			}
+		},
+		"hasCompetitor" : {
+			"from" : {
+				"classname" : "Organization"
+			},
+			"to" : {
+				"classname" : "Competitor"
+			}
+		}
+	}
+}

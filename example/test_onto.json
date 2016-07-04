@@ -1,0 +1,207 @@
+{
+	"name":"TestGraphschema",
+	"vertex_classes" : {
+		"Company" : {
+			"properties" : {
+				"id" : "string",
+				"name" : "string",
+				"homepage" : "string",
+				"number_of_employes" : "int",
+				"founded_date" : "string"
+			},
+			"identifier" : [
+				"id"
+			]
+		},
+		"Mamalan" : {
+			"properties" : {
+				"pooper" : {
+					"formatMethod" : "",
+					"type" : "bool",
+					"mergeable" : false
+				}
+			}
+		},
+		"Human" : {
+			"properties" : {
+				"first_name" : {
+					"formatMethod" : "formatFirstName",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"last_name" : {
+					"formatMethod" : "formatLastName",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"super_class" : "Mamalan"
+		},
+		"User" : {
+			"properties" : {
+				"id" : {
+					"formatMethod" : "formatId",
+					"type" : "identifier",
+					"mergeable" : false
+				},
+				"salutation" : {
+					"formatMethod" : "formatString",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"title" : {
+					"formatMethod" : "formatString",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"email" : {
+					"formatMethod" : "formatEmail",
+					"type" : "email",
+					"mergeable" : false
+				},
+				"tracking_id" : {
+					"formatMethod" : "formatString",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"tracking_sub_id" : {
+					"formatMethod" : "formatString",
+					"type" : "string",
+					"mergeable" : false
+				}
+			},
+			"super_class" : "Human",
+			"identifier" : [
+				"id"
+			],
+			"physical" : true
+		},
+		"ReceivingUser" : {
+			"super_class" : "User"
+		},
+		"PayingUser" : {
+			"properties" : {
+				"payingUser_onlyProperty" : {
+					"type" : "testType",
+					"formatMethod" : "testFormatMethod",
+					"mergeable" : false
+				}
+			},
+			"super_class" : "User"
+		},
+		"Product" : {
+			"properties" : {
+				"name" : "string",
+				"pzn" : "string",
+				"amount" : "string",
+				"amount_with_vat" : "string",
+				"position_in_transaction" : "string",
+				"type" : "string",
+				"homepage" : "string"
+			},
+			"identifier" : [
+				"pzn"
+			]
+		},
+		"Transaction" : {
+			"properties" : {
+				"id" : "string",
+				"payment_form_code" : "string",
+				"order_code" : "string",
+				"order_date" : "string",
+				"order_time" : "string",
+				"booking_date" : "string",
+				"booking_time" : "string",
+				"slip_date" : "string",
+				"packed_date" : "string",
+				"packed_time" : "string"
+			},
+			"identifier" : [
+				"id"
+			]
+		},
+		"Address" : {
+			"properties" : {
+				"long" : "float",
+				"lat" : "float",
+				"city" : "string",
+				"street1" : "string",
+				"street2" : "string",
+				"zip_code" : "string",
+				"code" : "string"
+			},
+			"identifier" : [
+				"long",
+				"lat"
+			]
+		}
+	},
+	"edge_classes" : {
+		"basicEdge" : {
+			"properties" : {
+				"direction" : {
+					"formatMethod" : "string",
+					"type" : "string",
+					"mergeable" : false
+				}
+			}
+		},
+		"isTransactionOf" : {
+			"properties" : {
+				"type" : {
+					"formatMethod" : "formatType",
+					"type" : "string",
+					"mergeable" : true
+				}
+			},
+			"from" : {
+				"classname" : "Transaction"
+			},
+			"to" : {
+				"classname" : "User"
+			},
+			"physical" : true,
+			"super_class":"basicEdge"
+		},
+		"isUserTransactionOf":{
+			"super_class":"isTransactionOf"
+		},
+		"makedOrder" : {
+			"from" : {
+				"classname" : "User"
+			},
+			"to" : {
+				"classname" : "Transaction"
+			}
+		},
+		"payedProduct" : {
+			"properties" : {
+				"type" : {
+					"formatMethod" : "formatType",
+					"type" : "string",
+					"mergeable" : false
+				},
+				"price" : {
+					"formatMethod" : "formatPrice",
+					"type" : "price",
+					"mergeable" : false
+				},
+				"amount" : {
+					"formatMethod" : "formatAmount",
+					"type" : "integer",
+					"mergeable" : false
+				}
+			},
+			"from" : {
+				"classname" : "PayingUser"
+			},
+			"to" : {
+				"classname" : "Product"
+			}
+		},
+		"hasAddress" : {},
+		"containsProduct" : {},
+		"isPartOfTransaction" : {},
+		"hasUser" : {}
+	}
+}

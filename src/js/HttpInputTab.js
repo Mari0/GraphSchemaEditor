@@ -1,20 +1,20 @@
 define([
     'jquery',
     'lodash',
-    'bootstrapWrapper/Alert',
-    'MappingManager',
-    'text!tpl/navbar/httpInputTab.html',
-    'text!tpl/navbar/radioButton.html',
-    'text!tpl/navbar/htmlGETForm.html',
-    'text!tpl/navbar/htmlPOSTForm.html'], /**@lends HttpInputTab*/
-	function ($, _, Alert, MappingManager, htmlHttpInputTab, tplRadioButton, htmlGETForm, htmlPOSTForm) {
+    'Alert',
+    'text!tpl/httpInputTab.html',
+    'text!tpl/radioButton.html',
+    'text!tpl/htmlGETForm.html',
+    'text!tpl/htmlPOSTForm.html'], /**@lends HttpInputTab*/
+	function ($, _, Alert,  htmlHttpInputTab, tplRadioButton, htmlGETForm, htmlPOSTForm) {
 	
 	function HttpInputTab() {
 
         var tpl = _.template(tplRadioButton);
+        var $httpInputTab = $(htmlHttpInputTab);
 
-        function RadioButton(label, appendToSelector, callback, active) {
-            $(appendToSelector).append($(tpl({name: label, active: active ? 'active' : ''}))
+        function RadioButton(label, callback, active) {
+            $httpInputTab.find('#httpInputRadioButtons').append($(tpl({name: label, active: active ? 'active' : ''}))
                 .click(function () {
                     if (callback) {
                         callback();
@@ -33,8 +33,8 @@ define([
                         } catch (e) {
                             data = resp;
                         }
-                        $('#panel_MappingConfigurator').remove();
-                        MappingManager.createMappingCanvasFromExample('HTTP GET Input', data);
+
+
                         Alert.Success('Get Request was sucessful', '#httpGetForm');
                     };
                     var errorCallback = function () {
@@ -94,7 +94,6 @@ define([
                     var data = $('#httpPostInputForm_getData').val();
                     $.post(url, data, function (data) {
                         $('#panel_MappingConfigurator').remove();
-                        MappingManager.createMappingCanvasFromExample('HTTP POST Input', data);
                         Alert.Success('Get Request was sucessful', '#httpPostForm');
                     }).fail(function (error) {
                         var e = JSON.parse(error.responseText);
@@ -104,26 +103,24 @@ define([
             return $htmlPOSTForm;
         }
 
-
-        $('#mc_navbar_content').append($(htmlHttpInputTab));
-
-        RadioButton('GET', '#httpInputRadioButtons', function () {
-            var $httpGetForm = $('#httpGetForm');
+        RadioButton('GET', function () {
+            var $httpGetForm = $httpInputTab.find('#httpGetForm');
             if ($httpGetForm.length === 0) {
-                $('#httpInputCtrl').find('.panel-body').append(httpGetInputForm());
+                $httpInputTab.find('.panel-body').append(httpGetInputForm());
             }
             $httpGetForm.show();
-            $('#httpPostForm').hide();
+            $httpInputTab.find('#httpPostForm').hide();
         }, true);
-        RadioButton('POST', '#httpInputRadioButtons', function () {
-            var $httpPostForm = $('#httpPostForm');
+        RadioButton('POST', function () {
+            var $httpPostForm = $httpInputTab.find('#httpPostForm');
             if ($httpPostForm.length === 0) {
-                $('#httpInputCtrl').find('.panel-body').append(httpPostInputForm());
+                $httpInputTab.find('.panel-body').append(httpPostInputForm());
             }
             $httpPostForm.show();
-            $('#httpGetForm').hide();
+            $httpInputTab.find('#httpGetForm').hide();
         });
 
+        return $httpInputTab;
 
     }
 	return HttpInputTab;
