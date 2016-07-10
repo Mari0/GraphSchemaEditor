@@ -28,4 +28,4 @@ requirejs.config({
 		}
 	}
 });
-requirejs(['css!../style', 'Main', 'bootstrap']);
+requirejs(['Main', 'bootstrap']);

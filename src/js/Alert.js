@@ -1,21 +1,22 @@
+'use strict';
 define([
-    'lodash'
+	'lodash'
 ], /**@lends Alert*/
-	function (_) {
+function (_) {
 	/**
 	 * @constructor
 	 * provides static methods to provide a easy use of the twitter bootstrap alerts
 	 */
 	function Alert() {}
 
-    var tpl = _.template('<div class="alert alert-<%-type%> alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><%-message%></div>');
+	var tpl = _.template('<div class="alert alert-<%-type%> alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><%-message%></div>');
 
 	/**
-	* a simple template for a twitter bootstrap alert 
-	* @param type {string} - twitter bootstrap alert type can be 'info', 'success','danger' and 'warning'
-	* @param message {string} - the content of the alert
-	* @return the alert as jquery-object
-	*/
+	 * a simple template for a twitter bootstrap alert
+	 * @param type {string} - twitter bootstrap alert type can be 'info', 'success','danger' and 'warning'
+	 * @param message {string} - the content of the alert
+	 * @return the alert as jquery-object
+	 */
 	var AlertTemplate = function (type, message) {
 		return $(tpl({ type: type, message: message}));
 	};
@@ -28,15 +29,15 @@ define([
 	Alert.Error = function (message, appendTo) {
 		$(appendTo).append(AlertTemplate('danger', message));
 	};
-	
+
 	Alert.Error2 = function(message, appendTo, callback){
 		var $message = AlertTemplate('danger', message);
 		var extras = $(document.createElement('p'))
 			.append($(document.createElement('button')).attr('class', 'btn btn-danger').attr('type', 'button').text('Do it!')
 				.click(function(){
 					if(callback) {
-                        callback();
-                    }
+						callback();
+					}
 				}))
 			.append($(document.createElement('button')).attr('class', 'btn btn-default').attr('type', 'button').text('Cancel')
 				.click(function(){
@@ -44,7 +45,7 @@ define([
 				}));
 		$(appendTo).append($($message).append(extras));
 	};
-		
+
 	/**
 	 * A simple info alert using Twitter Bootstrap
 	 * @param message{string} - the content of the alert
@@ -53,7 +54,7 @@ define([
 	Alert.Info = function (message, appendTo) {
 		$(appendTo).append(AlertTemplate('info', message));
 	};
-	
+
 	/**
 	 * A simple warning alert using Twitter Bootstrap
 	 * @param message{string} - the content of the alert
@@ -62,7 +63,7 @@ define([
 	Alert.Warning = function (message, appendTo) {
 		$(appendTo).append(AlertTemplate('warning', message));
 	};
-	
+
 	/**
 	 * A simple success alert using Twitter Bootstrap
 	 * @param message{string} - the content of the alert

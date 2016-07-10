@@ -10,25 +10,41 @@ module.exports = function (grunt) {
 					name : 'config',
 					optimizeCss : 'standard',
 					paths : {
-						requireLib : './../components/requirejs/require'
+						requireLib : './../components/requirejs/require',
+						bootstrap : "empty:",
+						jquery : "empty:",
+						jqueryui: "empty:",
+						lodash : "empty:",
+						jsonEditor : "empty:",
+						text: './../components/text/text',
+						tpl: "./../templates",
+						vis:"empty:"
 					},
+
 					include : 'requireLib',
 					logLevel : 0,
-					findNestedDependencies : true,
+					findNestedDependencies : false,
 					fileExclusionRegExp : /^\./,
 					inlineText : true,
-					out : 'dist/graphbuilder.js'
+					out : 'dist/gse.js'
 				}
 			},
 			build_min : {
 				options : {
 					baseUrl : "src/js",
-					optimize : 'uglify', //none, uglify
+					optimize : 'uglify2', //none, uglify
 					mainConfigFile : './src/js/config.js',
 					name : 'config',
 					paths : {
-						requireLib : './../components/requirejs/require'
-						//css : './../bower_components/require-css/css.min'
+						requireLib : './../components/requirejs/require',
+						bootstrap : "empty:",
+						jquery : "empty:",
+						jqueryui: "empty:",
+						lodash : "empty:",
+						jsonEditor : "empty:",
+						text: './../components/text/text',
+						tpl: "./../templates",
+						vis:"empty:"
 					},
 					//modules : [{
 					// name : 'config',
@@ -40,10 +56,10 @@ module.exports = function (grunt) {
 					//exclude : ['./../bower_components/require-css/normalize'],
 					logLevel : 0,
 					//separateCSS : true,
-					findNestedDependencies : true,
+					findNestedDependencies : false,
 					fileExclusionRegExp : /^\./,
 					inlineText : true,
-					out : 'dist/graphbuilder.min.js'
+					out : 'dist/gse.min.js'
 				}
 			}
 		},
@@ -56,9 +72,9 @@ module.exports = function (grunt) {
 					logUnusedDependencyNames : true
 				},
 				files : [{
-						src : ['src/js/**/*.js'],
-						dest : 'build/'
-					}
+					src : ['src/js/**/*.js'],
+					dest : 'build/'
+				}
 				]
 			}
 		},
@@ -78,15 +94,17 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-        clean:['dist']
+		clean:['dist']
 	});
 
-   //Load task
-   //grunt.loadTasks('tasks');
+	//Load task
+	//grunt.loadTasks('tasks');
 
 	grunt.loadNpmTasks('grunt-mkdir');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-amdcheck');
 	grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+
+
 };

@@ -1,23 +1,24 @@
+'use strict';
 define(['jquery',
-		'FileInputTab',
-		'HttpInputTab',
-        'text!tpl/navbar.html'], /**@lends NavigationBar*/
-	function ($, FileInputTab, HttpInputTab, navbarHtml) {
-    /**
-     * Initializes the Navigation Bar and all corresponding tabs
-     * @constructor
-     */
+	'FileInputTab',
+	'HttpInputTab',
+	'text!tpl/navbar.html'], /**@lends NavigationBar*/
+function ($, FileInputTab, HttpInputTab, navbarHtml) {
+	/**
+	 * Initializes the Navigation Bar and all corresponding tabs
+	 * @constructor
+	 */
 	function NavigationBar() {
-        var $body = $('body');
+		var $body = $('body');
 
-        //Initialize Tabs Navigation Container
-        $body.append($(navbarHtml));
+		//Initialize Tabs Navigation Container
+		$body.append($(navbarHtml));
 
-        //Initialize Content Container
+		//Initialize Content Container
 		var $navbar_content = $(document.createElement('div')).attr('class', 'tab-content');
-        $body.append($navbar_content);
+		$body.append($navbar_content);
 
-        //Init Tabs
+		//Init Tabs
 		$navbar_content.append(FileInputTab());
 		$navbar_content.append(HttpInputTab());
 

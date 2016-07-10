@@ -1,3 +1,4 @@
+'use strict';
 define([
     'jquery',
     'lodash',
@@ -6,9 +7,9 @@ define([
     'text!tpl/radioButton.html',
     'text!tpl/htmlGETForm.html',
     'text!tpl/htmlPOSTForm.html'], /**@lends HttpInputTab*/
-	function ($, _, Alert,  htmlHttpInputTab, tplRadioButton, htmlGETForm, htmlPOSTForm) {
-	
-	function HttpInputTab() {
+function ($, _, Alert,  htmlHttpInputTab, tplRadioButton, htmlGETForm, htmlPOSTForm) {
+
+    function HttpInputTab() {
 
         var tpl = _.template(tplRadioButton);
         var $httpInputTab = $(htmlHttpInputTab);
@@ -123,5 +124,5 @@ define([
         return $httpInputTab;
 
     }
-	return HttpInputTab;
+    return HttpInputTab;
 });

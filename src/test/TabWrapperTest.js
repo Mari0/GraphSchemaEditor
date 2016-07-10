@@ -1,11 +1,14 @@
+'use strict';
 define(['chai','TabWrapper'],function (chai,TabWrapper) {
     return function(){
         var expect = chai.expect;
         describe('Add Tabs to DOM using JQuery', function(){
+            var tabWrapperTest;
             before(function(done){
-                $('body').append(TabWrapper.get$node());
-                TabWrapper.addClosableTab('TestTab1',$('<div>Test Content 1</div>'), null);
-                TabWrapper.addClosableTab('TestTab2',$('<div>Test Content 2</div>'), null);
+                tabWrapperTest = new TabWrapper();
+                $('body').append(tabWrapperTest.get$node());
+                tabWrapperTest.addClosableTab('TestTab1',$('<div>Test Content 1</div>'), null);
+                tabWrapperTest.addClosableTab('TestTab2',$('<div>Test Content 2</div>'), null);
                 done();
 
             });
@@ -24,7 +27,7 @@ define(['chai','TabWrapper'],function (chai,TabWrapper) {
             });
 
             it('The second tab should be the active tab', function(){
-                expect(TabWrapper.getActiveTabId()).to.be.equal('#tabContent1');
+                expect(tabWrapperTest.getActiveTabId()).to.be.equal('#tabContent1');
 
             });
 
@@ -35,7 +38,7 @@ define(['chai','TabWrapper'],function (chai,TabWrapper) {
 
                 describe('Delete the first Tab and add a another Tab', function(){
                     before(function(done){
-                        TabWrapper.addClosableTab('TestTab3',$('<div>Test Content 3</div>'), null);
+                        tabWrapperTest.addClosableTab('TestTab3',$('<div>Test Content 3</div>'), null);
                         done();
                     });
 
@@ -46,7 +49,7 @@ define(['chai','TabWrapper'],function (chai,TabWrapper) {
                     });
 
                     it('The fourth tab should be the active tab', function(){
-                        expect(TabWrapper.getActiveTabId()).to.be.equal('#tabContent2');
+                        expect(tabWrapperTest.getActiveTabId()).to.be.equal('#tabContent2');
                     });
 
                     it('Check content containers');

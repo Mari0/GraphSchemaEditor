@@ -1,7 +1,9 @@
+'use strict';
 define(['jquery',
         'GraphSchemaManager',
+        'Alert',
         'text!tpl/fileInputTab.html'],
-    function ($, GraphSchemaManager,htmlFileInputTab) {
+    function ($, GraphSchemaManager,Alert,htmlFileInputTab) {
         /** loads the datasource example and initializes drag&drop-event and svg-element*/
         function loadDataSourceExample($node) {
             $node.find("#upload").change(function(){
@@ -11,8 +13,15 @@ define(['jquery',
                     reader.readAsText(file, "UTF-8");
 
                     reader.onload = function (evt) {
-                        GraphSchemaManager.add(JSON.parse(evt.target.result));
-                    };
+                        var json = JSON.parse(evt.target.result);
+                        var result = GraphSchemaManager.add(json);
+                        if(result instanceof  Error){
+                            Alert.Error('Error: ' + result.message, '#inputCtrl .panel-body');
+                        }
+                        else {
+                            Alert.Success('Successfully loaded ' + json.name + ' GraphSchema', '#inputCtrl .panel-body');
+                        }
+                    }
 
                 } else {
                     alert("Not a json file");

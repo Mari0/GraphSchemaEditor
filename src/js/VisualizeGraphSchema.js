@@ -1,3 +1,4 @@
+'use strict';
 define(['lodash','vis'], function(_,vis){
     return function(graphSchema){
         var network = {nodes:[], edges:[]};

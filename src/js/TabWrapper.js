@@ -1,26 +1,36 @@
+'use strict';
 define([
 	'jquery',
 	'lodash',
 	'bootstrap'], /**@lends TabWrapper*/
 function ($, _) {
-
-	function TabWrapper() {
+	"use strict";
+	function TabWrapper(tabContainerId,tabContentId) {
+		var that = this;
 
 		var tabCounter = 0, $activeTab, $activeContentContainer, activeTabId;
-		var tabIdPattern = 'tabContent';
 
-		var	tabContainerId = 'tabContainer';
+		var	_tabContainerId;
+		if(tabContainerId)
+			_tabContainerId = tabContainerId;
+		else
+			_tabContainerId = 'tabContainer';
 
-		var	tabContentId = 'tabContent';
+
+		var	_tabContentId;
+		if(tabContentId)
+			_tabContentId = tabContentId;
+		else
+			_tabContentId= 'tabContent';
 
 		var tplContainer = _.template('<div class="container-fluid"><ul class="nav nav-tabs marginBottom" id="<%-containerId%>"></ul></div>');
 
 		var tplContent = _.template('<div id="<%-contentId%>" class="tab-content"></div>');
 
-		var $node = $(tplContainer({containerId: tabContainerId}));
+		var $node = $(tplContainer({containerId: _tabContainerId}));
 
-		var $container = $node.find("#" + tabContainerId);
-		var $contentContainer = $(tplContent({contentId:tabContentId}));
+		var $container = $node.find("#" + _tabContainerId);
+		var $contentContainer = $(tplContent({contentId:_tabContentId}));
 
 
 		var bindShowEvent = function($tab, callback){
@@ -63,43 +73,70 @@ function ($, _) {
 			});
 		};
 
-		return {
-			get$node: function(){
-				return  $node.add($contentContainer);
-			},
-			getActiveTabId: function(){
-				return activeTabId;
-			},
-			addClosableTab : function(label, content, callback, closeCallback){
-				var tabId = tabIdPattern + tabCounter++;
-				$container.find('li').attr('class', '');
-				if($activeContentContainer)
-					$activeContentContainer.attr('class', 'panel panel-default tab-pane fade');
 
-				var $tab = $(document.createElement('li'))
-					.attr('class', 'active')
-					.append($(document.createElement('a'))
-						.attr('href', '#' + tabId)
-						.append($.parseHTML('<button class="close closeTab" type="button" >×</button>' + label)));
-				$activeTab = $tab.find('a');
-				$container.append($tab);
+		that.get$node = function(){
+			return  $node.add($contentContainer);
+		};
+		that.getActiveTabId = function(){
+			return activeTabId;
+		};
+		that.addClosableTab = function(label, content, callback, closeCallback){
+			var tabId = _tabContentId + tabCounter++;
+			$container.find('li').attr('class', '');
+			if($activeContentContainer)
+				$activeContentContainer.attr('class', 'panel panel-default tab-pane fade');
 
-				//register close event
-				bindCloseEvent($tab, closeCallback);
-				bindShowEvent($tab, callback);
+			var $tab = $(document.createElement('li'))
+				.attr('class', 'active')
+				.append($(document.createElement('a'))
+					.attr('href', '#' + tabId)
+					.append($.parseHTML('<button class="close closeTab" type="button" style="margin: -2px 0 0 10px; font-size: 18px;" >×</button>' + label)));
+			$activeTab = $tab.find('a');
+			$container.append($tab);
 
-				activeTabId = '#' + tabId;
+			//register close event
+			bindCloseEvent($tab, closeCallback);
+			bindShowEvent($tab, callback);
 
-				$activeContentContainer = $(document.createElement('div'))
-					.attr('class', 'panel panel-default tab-pane fade active in')
-					.attr('id', tabId)
-					.append(content);
+			activeTabId = '#' + tabId;
 
-				$contentContainer.append($activeContentContainer);
-				//this.showTab(activeTabId);
-			}
-		}
+			$activeContentContainer = $(document.createElement('div'))
+				.attr('class', 'panel panel-default tab-pane fade active in')
+				.attr('id', tabId)
+				.append(content);
+
+			$contentContainer.append($activeContentContainer);
+			//this.showTab(activeTabId);
+		};
+
+        that.addTab = function(label,content,callback){
+            var tabId = _tabContentId + tabCounter++;
+            $container.find('li').attr('class', '');
+            if($activeContentContainer)
+                $activeContentContainer.attr('class', 'panel panel-default tab-pane fade');
+
+            var $tab = $(document.createElement('li'))
+                .attr('class', 'active')
+                .append($(document.createElement('a'))
+                    .attr('href', '#' + tabId)
+                    .text(label));
+            $activeTab = $tab.find('a');
+            $container.append($tab);
+
+            //register close event
+            bindShowEvent($tab, callback);
+
+            activeTabId = '#' + tabId;
+
+            $activeContentContainer = $(document.createElement('div'))
+                .attr('class', 'panel panel-default tab-pane fade active in')
+                .attr('id', tabId)
+                .append(content);
+
+            $contentContainer.append($activeContentContainer);
+            //this.showTab(activeTabId);
+        }
 	}
 
-	return new TabWrapper();
+	return TabWrapper;
 });
