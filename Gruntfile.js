@@ -29,16 +29,34 @@ module.exports = function (grunt) {
 					out : 'dist/gse.js'
 				}
 			},
-			build_min : {
-				options : {
-					baseUrl : "src/js",
-					optimize : 'uglify2', //none, uglify
-					mainConfigFile : './src/js/config.js',
-					name : 'config',
-					paths : {
-						requireLib : './../components/requirejs/require',
-						bootstrap : "empty:",
-						jquery : "empty:",
+			build_with_dep:{
+				options: {
+					baseUrl: "src/js",
+					optimize: 'none', //none, uglify
+					mainConfigFile: './src/js/config.js',
+					name: 'config',
+					optimizeCss: 'standard',
+					paths: {
+						requireLib: './../components/requirejs/require'
+					},
+					include: 'requireLib',
+					logLevel: 0,
+					findNestedDependencies: false,
+					fileExclusionRegExp: /^\./,
+					inlineText: true,
+					out: 'app/gse.js'
+				}
+			},
+			build_min: {
+				options: {
+					baseUrl: "src/js",
+					optimize: 'uglify2', //none, uglify
+					mainConfigFile: './src/js/config.js',
+					name: 'config',
+					paths: {
+						requireLib: './../components/requirejs/require',
+						bootstrap: "empty:",
+						jquery: "empty:",
 						jqueryui: "empty:",
 						lodash : "empty:",
 						jsonEditor : "empty:",

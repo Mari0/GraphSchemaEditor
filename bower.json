@@ -22,7 +22,8 @@
     "vis": "^4.16.1",
     "jquery-ui": "^1.11.4",
     "require-css": "^0.1.8",
-    "text": "requirejs-text#^2.0.15"
+    "text": "requirejs-text#^2.0.15",
+    "jquery": "#2.1.1"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
